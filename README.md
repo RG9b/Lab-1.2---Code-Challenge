@@ -1,7 +1,4 @@
 # Operating Systems
-
-
-# Description of the repository
   In this repository are my codes of the lab 1.2
 
 # How to build and run
