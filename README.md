@@ -1,4 +1,4 @@
-# Lab-1.2---Code-Challenge
+# Operating Systems
 
 
 # Description of the repository
