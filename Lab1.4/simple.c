@@ -6,6 +6,30 @@
 
 void uptim(void);
 void getSystemInfo(void);
+void add(int ID,char *name,int age);
+void list(void);
+
+typedef struct{
+	int ID;
+	char *name;
+	int age;
+}student;
+
+student students[10];
+int count=0;
+
+void add(int ID,char *name,int age){
+	students[count].ID=ID;
+	students[count].name=name;
+	students[count].age=age;
+	count++;
+}
+void list(void){
+	int i;
+	for(i=0;i<count;i++){
+		printk("Student: %d ID: %d Name: %s Age: %d \n",i+1,students[i].ID,students[i].name,students[i].age);
+	}
+}
 
 void getSystemInfo()
 {
@@ -27,6 +51,10 @@ int simple_init(void)
 	printk(KERN_INFO "Initialization Module\n");
 	uptim();
 	getSystemInfo();
+	add(1234,"Alejandro Godoy",21);
+	add(4567,"Ramon Gradilla",22);
+	add(1234,"Jorge Fernando",20);
+	list();
 	return 0;
 }
 
