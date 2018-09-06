@@ -1,1 +1,1 @@
-This lab have a code for a shell with history command.
+This lab contains a C program of a shell, to compile you have to go in the direction you save the file and use the next command: gcc simple-shell.c -o simple-shell.o, after this for run the program you have to use the next command:./simple-shell.o
