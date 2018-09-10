@@ -1,1 +1,1 @@
-Holaaa
+This lab contains a C program for creat threads, to compile you have to go in the direction you save the file and use the next command: gcc helloToMany.c -o helloToMany.o, after this for run the program you have to use the next command:./helloToMany.o
