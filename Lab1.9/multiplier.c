@@ -4,7 +4,7 @@
 #include <string.h>
 #include <pthread.h>
 
-#define NUM_THREADS 5
+#define MAX_T 5
 #define COLUMN_SIZE 2000
 #define ROW_SIZE 2000
 #define FULL_SIZE COLUMN_SIZE*ROW_SIZE
@@ -77,17 +77,15 @@ long dotProduct(long *vec1,long *vec2){
 
 void *runner(void *param) 
 {
-	int buff;
-	unsigned long i;
-	unsigned long n=(unsigned long)param;
+	int buff,i;
 	while((buff=getLock())==-1);
 	for(i=0;i<COLUMN_SIZE;i++){
 		buffers[buff][i]=dotProduct(getRow((int)param,matrixA),getColumn(i,matrixB));
-		if(n==i) printf("n: %ld %ld\n",n,buffers[buff][i]);
 	}
 	for(i=0;i<COLUMN_SIZE;i++){
 		result[(int)param*ROW_SIZE+i]=buffers[buff][i];
 	}
+	printf("buffer: %ld\n",buff);
 
 	releaseLock(buff);
 	pthread_exit(0);
@@ -97,12 +95,12 @@ long *multiply(long *matA, long *matB){
 	int i,p,colu=0;
 	pthread_attr_t attr;
 	pthread_attr_init(&attr);
-	for(p=0;p<(ROW_SIZE/NUM_THREADS);p++){
-		for(i=0;i<NUM_THREADS;i++){	
+	for(p=0;p<(ROW_SIZE/MAX_T);p++){
+		for(i=0;i<MAX_T;i++){	
 			pthread_create(&tid[i],&attr,runner,(void *)colu);
 			colu++;
 		}
-		for(i=0;i<NUM_THREADS;i++)
+		for(i=0;i<MAX_T;i++)
 			pthread_join(tid[i],NULL);
 	}
 	return result;
@@ -111,6 +109,8 @@ long *multiply(long *matA, long *matB){
 int saveResultMatrix(long *result){
 	int i;
 	FILE *fp = fopen("result.dat","w");
+	if (fp==NULL) return -1;
+
 	for(i=0;i<FULL_SIZE;i++){
 		fprintf(fp,"%ld\n",result[i]);
 	}
