@@ -1,0 +1,1 @@
+This lab contains a C program for creat threads, to compile you have to go in the direction you save the file and use the next command: gcc multiplier.c -o multiplier.o -lpthread, after this for run the program you have to use the next command:./multiplier.o
