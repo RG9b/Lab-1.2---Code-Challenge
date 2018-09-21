@@ -149,7 +149,7 @@ int main(int argc, char *argv[])
 	memcpy(matrixB,readMatrix(PATH_B),FULL_SIZE*sizeof(long));
 	memcpy(res,multiply(matrixA,matrixB),FULL_SIZE*sizeof(long));
 	//printf("%ld\n",res[0]);
-	//saveResultMatrix(res);
+	saveResultMatrix(res);
 	free(buffers);
 	free(mutexes);
 	free(matrixA);
