@@ -9,7 +9,6 @@ You allocate memory using the malloc call in the standard C library. Also that t
 
 
 The program memory1 asks the malloc library to give it a pointer to a megabyte of memory. You check to ensure that malloc was successful and then use some of the memory to show that it exists. When you run the program, you should see Hello World printed out, showing that malloc did indeed return the megabyte.
-
 Malloc returns a void * pointer, you cast the result to the char * that you need. The malloc function is guaranteed to return memory that is aligned so that it can be cast to a pointer of any type.
 
 <h1>Allocating Lots of Memory</h1>
