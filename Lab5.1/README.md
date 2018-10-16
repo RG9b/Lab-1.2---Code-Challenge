@@ -47,7 +47,6 @@ Modern Linux systems are very protective about writing or reading from the addre
 
 In the memory5a program you try to access a null pointer. The first printf attempts to print out a string obtained from a null pointer; then the sprintf attempts to write to a null pointer. In this case, Linux (in the guise of the GNU “C” library) has been forgiving about the read and has simply provided a “magic” string containing the characters (null). It hasn’t been so forgiving about the write and has terminated the program.
 
-
 In the memory5b there is no GNU libc library between you and the kernel now, and the program is terminated.
 
 
