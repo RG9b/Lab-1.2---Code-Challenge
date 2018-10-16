@@ -4,6 +4,7 @@ On all computer systems memory is a scarce resource. No matter how much memory i
 
 Linux provides protection so that different applications are protected from each other, and it allows applications to apparently access more memory than is physically present in the machine, provided the machine is at least well configured and has sufficient swap space.
 
+
 <h1>Simple Memory Allocation</h1>
 You allocate memory using the malloc call in the standard C library. Also that the size parameter that specifies the number of bytes to allocate isn’t a simple int, although it’s usually an unsigned integer type. MS-DOS-based programs cannot access memory outside the base 640K memory map of PCs.
 
@@ -12,11 +13,13 @@ The program memory1 asks the malloc library to give it a pointer to a megabyte o
 
 Malloc returns a void * pointer, you cast the result to the char * that you need. The malloc function is guaranteed to return memory that is aligned so that it can be cast to a pointer of any type.
 
+
 <h1>Allocating Lots of Memory</h1>
 Linux exceed the limitations of the MS-DOS memory model. The memory2 program asks to allocate somewhat more memory than is physically present in the machine, so you might expect malloc to start failing somewhere a little short of the actual amount of memory present, because the kernel and all the other running processes are using some memory.
 
 
 The program simply loops, asking for more and more memory, until it has allocated twice the amount of memory you said your machine had when you adjusted the define PHY_MEM_MEGS. The surprise is that it works at all, because we appear to have created a program that uses every single byte of physical memory on the author’s machine. Notice that we use the size_t type for our call to malloc.
+
 
 <h1>Available Memory</h1>
 The memory3 program has allocated, and accessed, more memory than this author physically has in his machine at the time of writing. Finally, the system protects itself from this rather aggressive program and kills it. On some systems it may simply exit quietly when malloc fails.
@@ -37,6 +40,7 @@ The Linux memory management system has protected the rest of the system from thi
 
 Each running program on a Linux system sees its own memory map, which is different from every other program’s. Only the operating system knows how physical memory is arranged, and not only manages it for user programs, but also protects user programs from each other.
 
+
 <h1>The Null Pointer</h1>
 Modern Linux systems are very protective about writing or reading from the address referred to by a null pointer, although the actual behavior is implementation specific.
 
@@ -46,11 +50,13 @@ In the memory5a program you try to access a null pointer. The first printf attem
 
 In the memory5b there is no GNU libc library between you and the kernel now, and the program is terminated.
 
+
 <h1>Freeing Memory</h1>
 The Linux memory management system is quite capable of reliably ensuring that memory is returned to the system when a program ends. Programs that use memory on a dynamic basis should always release unused memory back to the malloc memory manager using the free call. This enables separate blocks to be remerged and enables the malloc library to look after memory, rather than have the application manage it.
 
 
 If a page of memory is not being used, then the Linux memory manager will be able to move it from physical memory to swap space, where it has little impact on the use of resources. If the program tries to access data inside the memory page that has be moved to swap space, then Linux will very briefly suspend the program, move the memory page back from swap space into physical memory again, and then allow the program to continue, just as though the data had been in memory all along. The memory6 program simply shows how to call free with a pointer to some previously allocated memory.
+
 
 <h1>Other Memory Allocation Functions</h1>
 Calloc allocates memory that can be freed with free, it has somewhat different parameters from malloc: It allocates memory for an array of structures and requires the number of elements and the size of each element as its parameters. The allocated memory is filled with zeros; and if calloc is successful, a pointer to the first element is returned.
