@@ -33,4 +33,5 @@ If a page of memory is not being used, then the Linux memory manager will be abl
 
 <h1>Other Memory Allocation Functions</h1>
 Calloc allocates memory that can be freed with free, it has somewhat different parameters from malloc: It allocates memory for an array of structures and requires the number of elements and the size of each element as its parameters. The allocated memory is filled with zeros; and if calloc is successful, a pointer to the first element is returned.
+
 The realloc function changes the size of a block of memory that has been previously allocated. It’s passed a pointer to some memory previously allocated by malloc, calloc, or realloc and resizes it up or down as requested. The realloc function may have to move data around to achieve this, so it’s important to ensure that once memory has been realloced, you always use the new pointer and never try to access the memory using pointers set up before realloc was called.
