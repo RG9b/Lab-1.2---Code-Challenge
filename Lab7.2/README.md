@@ -1,1 +1,1 @@
-./client3 x & ./client3 x & ./client3 x &
+This lab contains a C programs for a client and a server which can connect multiple clients, to compile you have to go in the direction you save the file and use the next command: gcc server3.c -o server3 and gcc client3.c -o client3, after this for run the program you have to use the next command:./server1 & and ./client3 x & ./client3 x & ./client3 x & for multiple Clients
